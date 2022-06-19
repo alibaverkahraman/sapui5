@@ -1,1 +1,46 @@
 /* Enter your custom styles here */
+
+.cusInput {
+  width: 100%;
+  /* max-width: 300px; */
+}
+.text-bold {
+  font-weight: bold !important;
+}
+.px-4 {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+.cusLabel {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.cusContainer {
+  padding-top: 10px;
+}
+.cusTimePicker,
+.cusSelect {
+  display: block;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.ma-0 {
+  margin: 0 !important;
+}
+.pa-0 {
+  padding: 0 !important;
+}
+
+/*************************************************************/
+
+/* #__grid1-wrapperfor-__grid0 {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+} */
+
+#__vbox0 {
+  width: 100% !important;
+}
