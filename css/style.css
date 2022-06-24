@@ -1,36 +1,57 @@
 /* Enter your custom styles here */
 
 .cusInput {
-  width: 100%;
-  /* max-width: 300px; */
+    width: 100%;
+    /* max-width: 300px; */
 }
 .text-bold {
-  font-weight: bold !important;
+    font-weight: bold !important;
 }
 .px-4 {
-  padding-left: 16px !important;
-  padding-right: 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
 }
 .cusLabel {
-  margin-bottom: 16px;
-  font-size: 16px;
-  font-weight: 600;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
 }
 .cusContainer {
-  padding-top: 10px;
+    padding-top: 10px;
 }
 .cusTimePicker,
 .cusSelect {
-  display: block;
+    display: block;
 }
 .mt-10 {
-  margin-top: 10px;
+    margin-top: 40px;
+}
+.mt-5 {
+    margin-top: 20px;
+}
+.ml-2 {
+    margin-left: 8px;
+}
+.mb-2 {
+    margin-bottom: 8px;
 }
 .ma-0 {
-  margin: 0 !important;
+    margin: 0 !important;
 }
 .pa-0 {
-  padding: 0 !important;
+    padding: 0 !important;
+}
+.kgDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: bisque;
+    text-transform: uppercase;
+    font-size: large;
+    border-radius: 4px;
 }
 
 /*************************************************************/
@@ -42,5 +63,5 @@
 } */
 
 #__vbox0 {
-  width: 100% !important;
+    width: 100% !important;
 }

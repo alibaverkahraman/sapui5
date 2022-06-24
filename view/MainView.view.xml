@@ -5,43 +5,46 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:l="sap.ui.layout"
-	xmlns:grid="sap.ui.layout.cssgrid"
-	xmlns:f="sap.f"
-	xmlns:cards="sap.f.cards">
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f"
+    xmlns:cards="sap.f.cards"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable">
     <Page id="page" title="{i18n>title}" class="bgColor">
       <content>
-
-            <l:Grid class="mt-10" containerQuery="true">
+            <l:Grid class="mt-5" containerQuery="true">
                 <l:content>
-
                     <!-- INPUTS -->
                     <VBox class="column">
                         <grid:CSSGrid class="px-0">
                             <grid:customLayout>
-                                <grid:ResponsiveColumnLayout/>
+                                <grid:ResponsiveColumnLayout />
                             </grid:customLayout>
                             <f:Card>
                                 <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="12"/>
+                                    <grid:ResponsiveColumnItemLayoutData columns="12" />
                                 </f:layoutData>
                                 <f:content>
                                     <VBox class="sapUiSmallMargin">
-                                        <Label text="KAYIT BİLGİLERİ" class="cusLabel"/>
+                                        <Label text="KAYIT BİLGİLERİ" class="cusLabel" />
                                         <l:VerticalLayout width="100%">
+                                            <Label class="kgDiv ml-2 mb-2" id="kg" text="0 KG">
+                                            </Label>
                                             <l:Grid containerQuery="true" defaultSpan="L6 M6 S12" class="pa-0">
                                                 <html:div class="cusContainer">
-                                                    <Label text="Plaka No"/>
-                                                    <Input class="cusInput" id="plaka_no"/>
+                                                    <Label text="Plaka No" />
+                                                    <Input class="cusInput" id="plaka_no" />
                                                 </html:div>
                                                 <html:div class="cusContainer">
-                                                    <Label text="Giriş Tarihi"/>
+                                                    <Label text="Giriş Tarihi" />
                                                     <DateTimeInput
                                                         id="date"
                                                         displayFormat="short"
-                                                        change="handleChange"/>
+                                                        change="handleChange"
+                                                    />
                                                 </html:div>
                                                 <html:div class="cusContainer">
-                                                    <Label text="Saat"/>
+                                                    <Label text="Saat" />
                                                     <TimePicker
                                                         id="time"
                                                         valueFormat="HH:mm:ss"
@@ -49,30 +52,39 @@
                                                         change="handleChange"
                                                         support2400="true"
                                                         maskMode="true"
-                                                        class="cusTimePicker"/>
+                                                        class="cusTimePicker"
+                                                    />
                                                 </html:div>
                                                 <html:div class="cusContainer">
-                                                    <Label text="Mal Cinsi"/>
+                                                    <Label text="Mal Cinsi" />
                                                     <Select
-                                                    class="cusSelect"
+                                                        class="cusSelect"
                                                         forceSelection="false"
                                                         selectedKey="{product>/SelectedProduct}"
                                                         items="{
                                                             path: 'product>/ProductCollection',
-                                                            sorter: { path: 'Name' }
-                                                        }">
-                                                        <core:Item key="{product>ProductId}" text="{product>Name}" />
+                                                            sorter: { path: 'name' }
+                                                        }"
+                                                        id="product">
+                                                        <core:Item key="{product>id}" text="{product>name}" />
                                                     </Select>
+                                                </html:div>
+                                                <html:div class="cusContainer">
+                                                    <Label text="Fiyat (1 KG)" />
+                                                    <Input
+                                                        class="cusInput"
+                                                        id="fiyat"
+                                                        liveChange="handleLiveChange"
+                                                        value="1,00"
+                                                    />
                                                 </html:div>
                                             </l:Grid>
                                         </l:VerticalLayout>
                                         <!-- SAVE BUTTON -->
                                         <l:VerticalLayout width="100%">
                                             <l:Grid containerQuery="true" defaultSpan="L12 M12 S12" class="pa-0">
-                                                <FlexBox
-                                                    alignItems="Center"
-                                                    justifyContent="End">
-                                                        <Button text="KAYDET" class="mt-10" press="onButtonPress"></Button>
+                                                <FlexBox alignItems="Center" justifyContent="End">
+                                                        <Button text="KAYDET" class="mt-5" press="onSave" />
                                                 </FlexBox>
                                             </l:Grid>
                                         </l:VerticalLayout>
@@ -85,65 +97,60 @@
                         </layoutData>
                     </VBox>
 
-                    <!-- FIRST TABLE -->
+                    <!-- ENRTY TABLE -->
                     <VBox class="column">
                         <grid:CSSGrid class="px-0">
                             <grid:customLayout>
-                                <grid:ResponsiveColumnLayout/>
+                                <grid:ResponsiveColumnLayout />
                             </grid:customLayout>
                             <f:Card>
                                 <f:layoutData>
-                                    <grid:ResponsiveColumnItemLayoutData columns="12"/>
+                                    <grid:ResponsiveColumnItemLayoutData columns="12" />
                                 </f:layoutData>
                                 <f:content>
                                     <VBox class="sapUiSmallMargin">
-                                        <Label text="GİRİŞ BİLGİLERİ" class="cusLabel"/>
+                                        <Label text="GİRİŞ BİLGİLERİ" class="cusLabel" />
                                         <html:div>
                                             <Table
                                                 inset="false"
                                                 items="{
-                                                    path: '/mydata',
-                                                    sorter: {
-                                                        path: 'plaka'
-                                                    }
-                                                }"
-
-                                                >
+                                                        path: 'entry>/entryData'
+                                                }">
                                                 <columns>
-                                                    <Column
-                                                        minScreenWidth="Tablet"
-                                                        demandPopin="true">
+                                                    <Column>
                                                         <Text text="PLAKA NO" />
                                                     </Column>
-                                                    <Column
-                                                        minScreenWidth="Tablet"
-                                                        demandPopin="true">
+                                                    <Column minScreenWidth="Tablet" demandPopin="true">
                                                         <Text text="GİRİŞ TARİHİ" />
                                                     </Column>
-                                                    <Column
-                                                        minScreenWidth="Tablet"
-                                                        demandPopin="true">
-                                                        <Text text="SAAT" />
+                                                    <Column minScreenWidth="Tablet" demandPopin="true">
+                                                        <Text text="GİR. SAATİ" />
                                                     </Column>
-                                                    <Column
-                                                        minScreenWidth="Tablet"
-                                                        demandPopin="true">
+                                                    <Column minScreenWidth="Tablet" demandPopin="true">
                                                         <Text text="MAL CİNSİ" />
+                                                    </Column>
+                                                    <Column minScreenWidth="Tablet" demandPopin="true">
+                                                        <Text text="KG" />
+                                                    </Column>
+                                                    <Column minScreenWidth="Tablet" demandPopin="true">
+                                                        <Text text="FİYAT" />
+                                                    </Column>
+                                                    <Column>
+                                                        <Text text="İŞLEM" />
                                                     </Column>
                                                 </columns>
                                                 <items>
                                                     <ColumnListItem vAlign="Middle">
                                                         <cells>
-                                                            <ObjectIdentifier
-                                                                text="{plaka}"
-                                                                />
-                                                            <Text
-                                                                text="{giris}"/>
-                                                            <Text
-                                                                text="{saat}"/>
-                                                            <Text
-                                                                text="{mal_cinsi}"/>
-
+                                                            <ObjectIdentifier text="{entry>plaka_no}" />
+                                                            <Text text="{entry>giris_tarihi}" />
+                                                            <Text text="{entry>giris_saati}" />
+                                                            <Text text="{entry>mal_cinsi}" />
+                                                            <Text text="{entry>kg}" />
+                                                            <Text text="{entry>fiyat}" />
+                                                            <VBox>
+                                                                <Button text="Çıkış" press="onExit" />
+                                                            </VBox>
                                                         </cells>
                                                     </ColumnListItem>
                                                 </items>
@@ -161,56 +168,64 @@
                 </l:content>
             </l:Grid>
 
-            <!-- SECOND TABLE -->
+            <!-- EXIT TABLE -->
             <l:VerticalLayout width="100%">
                 <l:Grid containerQuery="true" defaultSpan="L12 M12 S12">
                     <f:Card>
                         <f:layoutData>
-                            <grid:ResponsiveColumnItemLayoutData columns="12"/>
+                            <grid:ResponsiveColumnItemLayoutData columns="12" />
                         </f:layoutData>
                         <f:content>
                             <VBox class="sapUiSmallMargin">
-                                <Label text="ÇIKIŞ BİLGİLERİ" class="cusLabel"/>
+                                <Label text="ÇIKIŞ BİLGİLERİ" class="cusLabel" />
                                 <html:div>
-                                    <Table id="idProductsTable"
+                                    <Table
+                                        id="ExitsTable"
                                         inset="false"
                                         items="{
-                                            path: '/mydata',
-                                            sorter: {
-                                                path: 'plaka'
-                                            }
-                                        }"
-
-                                        >
+                                            path: 'exit>/exitData'
+                                        }">
                                         <columns>
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="MAKBUZ NO" />
+                                            </Column>
                                             <Column>
                                                 <Text text="PLAKA NO" />
                                             </Column>
-                                            <Column>
+                                            <Column minScreenWidth="Tablet">
                                                 <Text text="GİRİŞ TARİHİ" />
                                             </Column>
-                                            <Column>
-                                                <Text text="SAAT" />
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="ÇIKIŞ TARİHİ" />
                                             </Column>
-                                            <Column
-                                                minScreenWidth="Tablet"
-                                                demandPopin="true">
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="GİR. SAATİ" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="ÇIK. SAATİ" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet">
                                                 <Text text="MAL CİNSİ" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="KG" />
+                                            </Column>
+                                            <Column minScreenWidth="Tablet">
+                                                <Text text="FİYAT" />
                                             </Column>
                                         </columns>
                                         <items>
                                             <ColumnListItem vAlign="Middle">
                                                 <cells>
-                                                    <ObjectIdentifier
-                                                        title="{plaka}"
-                                                        />
-                                                    <Text
-                                                        text="{giris}" class="text-bold"/>
-                                                    <Text
-                                                        text="{saat}" class="text-bold"/>
-                                                    <Text
-                                                        text="{mal_cinsi}" class="text-bold"/>
-
+                                                    <ObjectIdentifier title="{exit>makbuz_no}" />
+                                                    <Text text="{exit>plaka_no}" class="text-bold" />
+                                                    <Text text="{exit>giris_tarihi}" class="text-bold" />
+                                                    <Text text="{exit>cikis_tarihi}" class="text-bold" />
+                                                    <Text text="{exit>giris_saati}" class="text-bold" />
+                                                    <Text text="{exit>cikis_saati}" class="text-bold" />
+                                                    <Text text="{exit>mal_cinsi}" class="text-bold" />
+                                                    <Text text="{exit>kg}" class="text-bold" />
+                                                    <Text text="{exit>fiyat}" class="text-bold" />
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
