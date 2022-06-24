@@ -186,31 +186,31 @@
                                             path: 'exit>/exitData'
                                         }">
                                         <columns>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="MAKBUZ NO" />
                                             </Column>
                                             <Column>
                                                 <Text text="PLAKA NO" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="GİRİŞ TARİHİ" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="ÇIKIŞ TARİHİ" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="GİR. SAATİ" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="ÇIK. SAATİ" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="MAL CİNSİ" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="KG" />
                                             </Column>
-                                            <Column minScreenWidth="Tablet">
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
                                                 <Text text="FİYAT" />
                                             </Column>
                                         </columns>
