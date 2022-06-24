@@ -154,6 +154,8 @@ sap.ui.define(
                 oSelectedItem.fiyat = oSelectedItem.fiyat.split(".").join("");
                 oSelectedItem.fiyat = oSelectedItem.fiyat.split(",").join(".");
 
+                console.log(oSelectedItem);
+
                 var url = "https://db-api-app.herokuapp.com/api/post/exit/";
                 var ths = this;
                 var json = JSON.stringify(oSelectedItem);
